@@ -15,6 +15,53 @@
 
     <div class="container">
         <h1 class="text-center">Weather Page</h1>
+        
+        <hr>
+        
+        <div>
+            <form class="form-horizontal">
+                <div class="form-group d-flex justify-content-center">
+                    <label for="zipcodeInput" class="form-label">Zipcode</label>
+                    <div class="col">
+                        <input type="text"
+                               class="form-control"
+                               id="zipcodeInput"
+                               placeholder="12345"
+                               required>
+                    </div>
+
+                    <label for="unitInput" class="form-label">Units</label>
+                    <div class="col">
+                        <select class="custom-select"
+                                name="unitInput" 
+                                id="unitInput">
+                            <option value="metric">Metric</option>
+                            <option value="imperial">Imperial</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col">
+                        <button class="btn btn-primary">
+                            Get Weather
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <hr>
+        
+        <h2>Current Conditions in Akron</h2>
+        <div class="row">
+
+        </div>
+        
+        <hr>
+        
+        <h2>Five Day Forecast</h2>
+        <div class="row">
+            
+        </div>
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
