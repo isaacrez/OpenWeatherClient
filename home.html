@@ -54,16 +54,27 @@
 
     <h2 id="conditionsIn">Current Conditions in </h2>
     <div class="row">
-        <div class="col">
-            <img id="conditionImg" />
-            <p id="conditionDisplay">Haze: haze</p>
+        <div class="col-6">
+            <div class="d-flex h-100 align-items-center">
+                <img id="conditionImg" />
+                <p id="conditionDisplay" class="ml-3">Haze: haze</p>
+            </div>
         </div>
-        <div class="col">
-            <p id="tempDisplay">Temperature: 76.77 F</p>
-            <p id="humidDisplay">Humidity: 61%</p>
-            <p id="windDisplay">Wind: 3.38 miles/hour</p>                
-        </div>
-        <div class="col">
+        <div class="col-4">
+            <div class="d-flex justify-content-between" style="max-width: 225px;">
+                <p class="mb-0"><b>Temperature:</b></p>
+                <p id="tempDisplay" class="mb-0">76.77 F</p>
+            </div>
+
+            <div class="d-flex justify-content-between" style="max-width: 225px;">
+                <p class="mb-0"><b>Humidity:</b></p>
+                <p id="humidDisplay" class="mb-0">61%</p>
+            </div>
+                
+            <div class="d-flex justify-content-between" style="max-width: 225px;">
+                <p class="mb-0"><b>Wind:</b></p>
+                <p id="windDisplay" class="mb-0"></p>
+            </div>
         </div>
     </div>
 

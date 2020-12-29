@@ -12,9 +12,9 @@ function updateCurrentWeather(data) {
     $('#conditionImg').attr('src', getIconSrc(data));
     $('#conditionDisplay').text(data.weather[0].main + ': ' + data.weather[0].description);
 
-    $('#tempDisplay').text('Temperature: ' + data.main.temp + getTempUnits());
-    $('#humidDisplay').text('Humidity: ' + data.main.humidity + '%');
-    $('#windDisplay').text('Wind: ' + data.wind.speed + ' ' + getSpeedUnits());
+    $('#tempDisplay').html(data.main.temp + ' ' + getTempUnits());
+    $('#humidDisplay').html(data.main.humidity + '%');
+    $('#windDisplay').html(data.wind.speed + ' ' + getSpeedUnits());
 }
 
 function addForecastEntry(data, dayOffset) {
