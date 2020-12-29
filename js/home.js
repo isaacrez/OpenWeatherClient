@@ -3,18 +3,91 @@ var APIKey = "78caea59c91a7db4d28883099674f1c2";
 var units = 'imperial';
 var zip = '44311';
 
-function urlCall(baseUrl) {
-    return baseUrl + 'zip=' + zip + '&appid=' + APIKey + '&units=' + units;
+$(document).ready(function () {
+    hideWeatherDataDisplay();
+    $('#getWeatherBtn').click(function() {
+        updateWeather();
+    });
+});
+
+function hideWeatherDataDisplay() {
+    $('#container').children().hide();
+    $('.base').show();
 }
 
-function updateCurrentWeather(data) {
-    $('#conditionsIn').text('Current Conditions in ' + data.name);
-    $('#conditionImg').attr('src', getIconSrc(data));
-    $('#conditionDisplay').text(data.weather[0].main + ': ' + data.weather[0].description);
+function unhideEverything() {
+    $('#container').children().show();
+}
 
-    $('#tempDisplay').html(data.main.temp + ' ' + getTempUnits());
-    $('#humidDisplay').html(data.main.humidity + '%');
-    $('#windDisplay').html(data.wind.speed + ' ' + getSpeedUnits());
+function updateWeather() {
+    zip = $('#zipcodeInput').val();
+    units = $('#unitInput').val();
+    
+    if (validZip()) {
+        unhideEverything();
+        updateCurrentWeather();
+        updateForecast();
+    } else {
+        hideWeatherDataDisplay();
+        addErrorMessage('Please use a valid, 5-digit zipcode.');
+    }
+}
+
+function validZip() {
+    return /^[0-9]{5}$/.test(zip);
+}
+
+function updateCurrentWeather() {
+    $.ajax({
+        type: 'GET',
+        url: urlCall('http://api.openweathermap.org/data/2.5/weather?'),
+        
+        success: function(data) {
+            $('#errorMessages').empty();
+            $('#conditionsIn').text('Current Conditions in ' + data.name);
+            $('#conditionImg').attr('src', getIconSrc(data));
+            $('#conditionDisplay').text(data.weather[0].main + ': ' + data.weather[0].description);
+
+            $('#tempDisplay').html(data.main.temp + ' ' + getTempUnits());
+            $('#humidDisplay').html(data.main.humidity + '%');
+            $('#windDisplay').html(data.wind.speed + ' ' + getSpeedUnits());
+        },
+        
+        error: function(xhr, status, error) {
+            hideWeatherDataDisplay();
+            if (xhr.status == 404) {
+                addErrorMessage('Zipcode could not be found!');
+            } else {
+                addErrorMessage('Error communicating with database, please try again later.');
+            }
+        }
+    });
+}
+
+function addErrorMessage(msg) {
+    $('#errorMessages')
+        .append($('<li>')
+        .attr({class: 'list-group-item list-group-item-danger mb-1'})
+        .text(msg));   
+}
+
+function updateForecast() {
+    $.ajax({
+        type: 'GET',
+        url: urlCall('http://api.openweathermap.org/data/2.5/forecast?'),
+        
+        success: function(data) {
+            $('#forecastData').empty();
+            for (var i = 7; i < data.cnt; i += 8) {
+                var day = (i + 1) / 8;
+                addForecastEntry(data.list[i], day);
+            }
+        },
+        
+        error: function() {
+            hideWeatherDataDisplay();
+        }
+    });
 }
 
 function addForecastEntry(data, dayOffset) {
@@ -51,34 +124,6 @@ function getSpeedUnits() {
     return units === 'imperial' ? 'mi/hr' : 'm/s';
 }
 
-$(document).ready(function () {
-    $.ajax({
-        type: 'GET',
-        url: urlCall('http://api.openweathermap.org/data/2.5/weather?'),
-        
-        success: function(data) {
-            updateCurrentWeather(data);
-        },
-        
-        error: function(xhr, status, error) {
-            console.log(status);
-        }
-    });
-    
-    $.ajax({
-        type: 'GET',
-        url: urlCall('http://api.openweathermap.org/data/2.5/forecast?'),
-        
-        success: function(data) {
-            $('#forecastData').empty();
-            for (var i = 7; i < data.cnt; i += 8) {
-                var day = (i + 1) / 8;
-                addForecastEntry(data.list[i], day);
-            }
-        },
-        
-        error: function() {
-            console.log(status);
-        }
-    })
-});
+function urlCall(baseUrl) {
+    return baseUrl + 'zip=' + zip + '&appid=' + APIKey + '&units=' + units;
+}

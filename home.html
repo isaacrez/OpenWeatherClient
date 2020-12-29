@@ -13,18 +13,19 @@
 </head>
 <body>
 
-<div class="container">
-    <h1 class="text-center">Weather Page</h1>
+<div id="container" class="container">
+    <h1 class="text-center base">Weather Page</h1>
 
-    <hr>
+    <hr class="base">
+    
+    <li id="errorMessages" class="base list-group mb-3"></li>
 
-    <div>
-        <form class="form-horizontal">
+    <div class="base">
+        <form class="form-horizontal" id="weatherForm">
             <div class="form-group d-flex justify-content-center align-items-center">
                 <label for="zipcodeInput" class="form-label">Zip Code</label>
                 <div class="col">
                     <input type="text"
-                           pattern="[0-9]*.{5}"
                            class="form-control"
                            id="zipcodeInput"
                            placeholder="12345"
@@ -42,7 +43,9 @@
                 </div>
 
                 <div class="col">
-                    <button class="btn btn-primary">
+                    <button id="getWeatherBtn"
+                            type="button"
+                            class="btn btn-primary">
                         Get Weather
                     </button>
                 </div>
@@ -57,18 +60,18 @@
         <div class="col-6">
             <div class="d-flex h-100 align-items-center">
                 <img id="conditionImg" />
-                <p id="conditionDisplay" class="ml-3">Haze: haze</p>
+                <p id="conditionDisplay" class="ml-3">N/A: N/A</p>
             </div>
         </div>
         <div class="col-4">
             <div class="d-flex justify-content-between" style="max-width: 225px;">
                 <p class="mb-0"><b>Temperature:</b></p>
-                <p id="tempDisplay" class="mb-0">76.77 F</p>
+                <p id="tempDisplay" class="mb-0"></p>
             </div>
 
             <div class="d-flex justify-content-between" style="max-width: 225px;">
                 <p class="mb-0"><b>Humidity:</b></p>
-                <p id="humidDisplay" class="mb-0">61%</p>
+                <p id="humidDisplay" class="mb-0"></p>
             </div>
                 
             <div class="d-flex justify-content-between" style="max-width: 225px;">
