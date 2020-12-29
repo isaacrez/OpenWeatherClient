@@ -11,113 +11,74 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
-    <body>
+<body>
 
-    <div class="container">
-        <h1 class="text-center">Weather Page</h1>
-        
-        <hr>
-        
-        <div>
-            <form class="form-horizontal">
-                <div class="form-group d-flex justify-content-center">
-                    <label for="zipcodeInput" class="form-label">Zip Code</label>
-                    <div class="col">
-                        <input type="text"
-                               pattern="[0-9]*.{5}"
-                               class="form-control"
-                               id="zipcodeInput"
-                               placeholder="12345"
-                               required>
-                    </div>
+<div class="container">
+    <h1 class="text-center">Weather Page</h1>
 
-                    <label for="unitInput" class="form-label">Units</label>
-                    <div class="col">
-                        <select class="custom-select"
-                                name="unitInput" 
-                                id="unitInput">
-                            <option value="metric">Metric</option>
-                            <option value="imperial">Imperial</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col">
-                        <button class="btn btn-primary">
-                            Get Weather
-                        </button>
-                    </div>
+    <hr>
+
+    <div>
+        <form class="form-horizontal">
+            <div class="form-group d-flex justify-content-center align-items-center">
+                <label for="zipcodeInput" class="form-label">Zip Code</label>
+                <div class="col">
+                    <input type="text"
+                           pattern="[0-9]*.{5}"
+                           class="form-control"
+                           id="zipcodeInput"
+                           placeholder="12345"
+                           required>
                 </div>
-            </form>
+
+                <label for="unitInput" class="form-label">Units</label>
+                <div class="col">
+                    <select class="custom-select"
+                            name="unitInput" 
+                            id="unitInput">
+                        <option value="metric">Metric</option>
+                        <option value="imperial">Imperial</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <button class="btn btn-primary">
+                        Get Weather
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+
+    <h2 id="conditionsIn">Current Conditions in </h2>
+    <div class="row">
+        <div class="col">
+            <img id="conditionImg" />
+            <p id="conditionDisplay">Haze: haze</p>
         </div>
-        
-        <hr>
-        
-        <h2>Current Conditions in Akron</h2>
-        <div class="row">
-            <div class="col">
-                <img id="conditionImg" />
-                <p id="conditionDisplay">Haze: haze</p>
-            </div>
-            <div class="col">
-                <p id="tempDisplay">Temperature: 76.77 F</p>
-                <p id="humidDisplay">Humidity: 61%</p>
-                <p id="windDisplay">Wind: 3.38 miles/hour</p>                
-            </div>
-            <div class="col">
-            </div>
+        <div class="col">
+            <p id="tempDisplay">Temperature: 76.77 F</p>
+            <p id="humidDisplay">Humidity: 61%</p>
+            <p id="windDisplay">Wind: 3.38 miles/hour</p>                
         </div>
-        
-        <hr>
-        
-        <h2>Five Day Forecast</h2>
-        <div class="row">
-            <div class="col" id="day1">
-                <p id="day1Date">3 August</p>
-                <div class="row">
-                    <img id="day1ConditionImg"/>
-                    <p id="day1Condition">Clear</p>
-                </div>
-                <p id="day1Temps">H 87.26 F L 73.6 F</p>
-            </div>
-            <div class="col" id="day1">
-                <p id="day2Date">4 August</p>
-                <div class="row">
-                    <img id="day2ConditionImg"/>
-                    <p id="day2Condition">Clear</p>
-                </div>
-                <p id="day2Temps">H 87.26 F L 73.6 F</p>
-            </div>
-            <div class="col" id="day1">
-                <p id="day3Date">5 August</p>
-                <div class="row">
-                    <img id="day3ConditionImg"/>
-                    <p id="day3Condition">Clear</p>
-                </div>
-                <p id="day3Temps">H 87.26 F L 73.6 F</p>
-            </div>
-            <div class="col" id="day1">
-                <p id="day4Date">6 August</p>
-                <div class="row">
-                    <img id="day4ConditionImg"/>
-                    <p id="day4Condition">Clear</p>
-                </div>
-                <p id="day4Temps">H 87.26 F L 73.6 F</p>
-            </div>
-            <div class="col" id="day1">
-                <p id="day5Date">7 August</p>
-                <div class="row">
-                    <img id="day5ConditionImg"/>
-                    <p id="day5Condition">Clear</p>
-                </div>
-                <p id="day5Temps">H 87.26 F L 73.6 F</p>
-            </div>
+        <div class="col">
         </div>
     </div>
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/home.js"></script>
-    </body>
+    <hr>
+
+    <h2>Five Day Forecast</h2>
+    <div id="forecastData" class="row">
+
+    </div>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="js/home.js"></script>
+</body>
 </html>
