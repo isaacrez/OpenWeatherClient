@@ -9,7 +9,7 @@ function urlCall(baseUrl) {
 
 function updateCurrentWeather(data) {
     $('#conditionsIn').text('Current Conditions in ' + data.name);
-    $('#conditionImg').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+    $('#conditionImg').attr('src', getIconSrc(data));
     $('#conditionDisplay').text(data.weather[0].main + ': ' + data.weather[0].description);
 
     if (units === 'imperial') {
@@ -20,6 +20,32 @@ function updateCurrentWeather(data) {
         $('#windDisplay').text('Wind: ' + data.wind.speed + '  m/s');
     }
     $('#humidDisplay').text('Humidity: ' + data.main.humidity + '%');
+}
+
+function addForecastEntry(data, dayOffset) {
+    var entry = '<div class="col d-flex flex-column align-items-center">';
+        entry += '<p><b>' + getDate(dayOffset) + '</b></p>';
+        entry += '<div class="row align-items-center">';
+            entry += '<img src="' + getIconSrc(data) + '" />';
+            entry += '<p>' + data.weather[0].main + '</p>';
+        entry += '</div>';
+        entry += '<p class="mb-0">H: ' + data.main.temp_max + '</p>';
+        entry += '<p>L: ' + data.main.temp_min + '</p>';
+    entry += '</div>';
+
+    $('#forecastData').append(entry);
+}
+
+function getDate(dayOffset) {    
+    var d = new Date();
+    d.setDate(d.getDate() + dayOffset);
+
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return (d.getDate()) + ' ' + months[d.getMonth()];
+}
+
+function getIconSrc(data) {
+    return 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
 }
 
 $(document).ready(function () {
@@ -42,21 +68,9 @@ $(document).ready(function () {
         
         success: function(data) {
             console.log('Received forecast data!');
-            var d = new Date();
-            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            for (var i = 0; i < data.cnt; i += 8) {
-                console.log('Adding data...');
-                var entry = '<div class="col d-flex flex-column align-items-center">';
-                entry += '<p>' + d.getDay() + ' ' + months[d.getMonth()] + '</p>';
-                entry += '<div class="row">';
-                entry += '<img src="http://openweathermap.org/img/w/' + data.list[i].weather[0].icon + '.png" />';
-                entry += '<p>' + data.list[i].weather[0].main + '</p>';
-                entry += '</div>';
-                entry += '<p>H: ' + data.list[i].main.temp_max + '</p>';
-                entry += '<p>L: ' + data.list[i].main.temp_min + '</p>';
-                entry += '</div>';
-                
-                $('#forecastData').append(entry);
+            for (var i = 7; i < data.cnt; i += 8) {
+                var day = (i + 1) / 8;
+                addForecastEntry(data.list[i], day);
             }
         },
         
