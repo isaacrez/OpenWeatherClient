@@ -8,91 +8,88 @@
     <title>Open Weather Client</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 </head>
-<body>
+<body class="bg-dark">
 
-<div id="container" class="container">
-    <h1 class="text-center base">Weather Page</h1>
+<div class="container">
+    <div id="pageContent"
+         class="bg-light p-3 mt-5
+                border border-2 border-secondary rounded">
+        <h1 class="text-center base">Weather Page</h1>
 
-    <hr class="base">
-    
-    <li id="errorMessages" class="base list-group mb-3"></li>
+        <hr class="base">
 
-    <div class="base">
-        <form class="form-horizontal" id="weatherForm">
-            <div class="form-group d-flex justify-content-center align-items-center">
-                <label for="zipcodeInput" class="form-label">Zip Code</label>
-                <div class="col">
+        <li id="errorMessages" class="base list-group mb-3"></li>
+
+        <div class="base">
+            <form id="weatherForm"
+                  class="d-flex justify-content-around align-items-center mx-auto"
+                  style="max-width: 650px;">
+                    <label for="zipcodeInput" class="form-label m-0">Zip Code</label>
                     <input type="text"
-                           class="form-control"
-                           id="zipcodeInput"
-                           placeholder="12345"
-                           required>
-                </div>
-
-                <label for="unitInput" class="form-label">Units</label>
-                <div class="col">
-                    <select class="custom-select"
+                               class="form-control w-25"
+                               id="zipcodeInput"
+                               placeholder="12345"
+                               required>
+                
+                    <label for="unitInput" class="form-label m-0">Units</label>
+                    <select class="form-select w-25"
                             name="unitInput" 
                             id="unitInput">
                         <option value="metric">Metric</option>
                         <option value="imperial">Imperial</option>
                     </select>
-                </div>
-
-                <div class="col">
-                    <button id="getWeatherBtn"
-                            type="button"
-                            class="btn btn-primary">
-                        Get Weather
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <hr>
-
-    <h2 id="conditionsIn">Current Conditions in </h2>
-    <div class="row">
-        <div class="col-6">
-            <div class="d-flex h-100 align-items-center">
-                <img id="conditionImg" />
-                <p id="conditionDisplay" class="ml-3">N/A: N/A</p>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="d-flex justify-content-between" style="max-width: 225px;">
-                <p class="mb-0"><b>Temperature:</b></p>
-                <p id="tempDisplay" class="mb-0"></p>
-            </div>
-
-            <div class="d-flex justify-content-between" style="max-width: 225px;">
-                <p class="mb-0"><b>Humidity:</b></p>
-                <p id="humidDisplay" class="mb-0"></p>
-            </div>
                 
-            <div class="d-flex justify-content-between" style="max-width: 225px;">
-                <p class="mb-0"><b>Wind:</b></p>
-                <p id="windDisplay" class="mb-0"></p>
+                <button id="getWeatherBtn"
+                        type="button"
+                        class="btn btn-primary">
+                    Get Weather
+                </button>
+            </form>
+        </div>
+
+        <hr>
+
+        <h2 id="conditionsIn">Current Conditions in </h2>
+        <div class="row">
+            <div class="col-6">
+                <div class="d-flex h-100 align-items-center">
+                    <img id="conditionImg" />
+                    <p id="conditionDisplay" class="ml-3">N/A: N/A</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="d-flex justify-content-between" style="max-width: 225px;">
+                    <p class="mb-0"><b>Temperature:</b></p>
+                    <p id="tempDisplay" class="mb-0"></p>
+                </div>
+
+                <div class="d-flex justify-content-between" style="max-width: 225px;">
+                    <p class="mb-0"><b>Humidity:</b></p>
+                    <p id="humidDisplay" class="mb-0"></p>
+                </div>
+
+                <div class="d-flex justify-content-between" style="max-width: 225px;">
+                    <p class="mb-0"><b>Wind:</b></p>
+                    <p id="windDisplay" class="mb-0"></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <hr>
+        <hr>
 
-    <h2>Five Day Forecast</h2>
-    <div id="forecastData" class="row">
+        <h2>Five Day Forecast</h2>
+        <div id="forecastData" class="row">
 
+        </div>
     </div>
 </div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 <script src="js/home.js"></script>
 </body>
 </html>

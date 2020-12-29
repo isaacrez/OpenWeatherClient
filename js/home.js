@@ -11,12 +11,12 @@ $(document).ready(function () {
 });
 
 function hideWeatherDataDisplay() {
-    $('#container').children().hide();
+    $('#pageContent').children().hide();
     $('.base').show();
 }
 
 function unhideEverything() {
-    $('#container').children().show();
+    $('#pageContent').children().show();
 }
 
 function updateWeather() {
@@ -91,11 +91,11 @@ function updateForecast() {
 }
 
 function addForecastEntry(data, dayOffset) {
-    var entry = '<div class="col d-flex flex-column align-items-center">';
+    var entry = '<div class="container-sm col d-flex flex-column align-items-center img-thumbnail">';
         entry += '<p><b>' + getDate(dayOffset) + '</b></p>';
-        entry += '<div class="row align-items-center">';
-            entry += '<img src="' + getIconSrc(data) + '" />';
-            entry += '<p>' + data.weather[0].main + '</p>';
+        entry += '<div class="row align-items-center justify-content-center">';
+            entry += '<div class="col"><img class="img-fluid" src="' + getIconSrc(data) + '" /></div>';
+            entry += '<p class="col">' + data.weather[0].main + '</p>';
         entry += '</div>';
         entry += '<p class="mb-0"><b>[H]</b> ' + data.main.temp_max + ' ' + getTempUnits() + '</p>';
         entry += '<p><b>[L]</b> ' + data.main.temp_min + ' ' + getTempUnits() + '</p>';
