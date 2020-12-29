@@ -12,14 +12,9 @@ function updateCurrentWeather(data) {
     $('#conditionImg').attr('src', getIconSrc(data));
     $('#conditionDisplay').text(data.weather[0].main + ': ' + data.weather[0].description);
 
-    if (units === 'imperial') {
-        $('#tempDisplay').text('Temperature: ' + data.main.temp + '°F');
-        $('#windDisplay').text('Wind: ' + data.wind.speed + ' mi/hr');
-    } else if (units === 'metric') {
-        $('#tempDisplay').text('Temperature: ' + data.main.temp + '°C');
-        $('#windDisplay').text('Wind: ' + data.wind.speed + '  m/s');
-    }
+    $('#tempDisplay').text('Temperature: ' + data.main.temp + getTempUnits());
     $('#humidDisplay').text('Humidity: ' + data.main.humidity + '%');
+    $('#windDisplay').text('Wind: ' + data.wind.speed + ' ' + getSpeedUnits());
 }
 
 function addForecastEntry(data, dayOffset) {
@@ -29,8 +24,8 @@ function addForecastEntry(data, dayOffset) {
             entry += '<img src="' + getIconSrc(data) + '" />';
             entry += '<p>' + data.weather[0].main + '</p>';
         entry += '</div>';
-        entry += '<p class="mb-0">H: ' + data.main.temp_max + '</p>';
-        entry += '<p>L: ' + data.main.temp_min + '</p>';
+        entry += '<p class="mb-0"><b>[H]</b> ' + data.main.temp_max + ' ' + getTempUnits() + '</p>';
+        entry += '<p><b>[L]</b> ' + data.main.temp_min + ' ' + getTempUnits() + '</p>';
     entry += '</div>';
 
     $('#forecastData').append(entry);
@@ -46,6 +41,14 @@ function getDate(dayOffset) {
 
 function getIconSrc(data) {
     return 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+}
+
+function getTempUnits() {
+    return units === 'imperial' ? '°F' : '°C';
+}
+
+function getSpeedUnits() {
+    return units === 'imperial' ? 'mi/hr' : 'm/s';
 }
 
 $(document).ready(function () {
@@ -67,7 +70,7 @@ $(document).ready(function () {
         url: urlCall('http://api.openweathermap.org/data/2.5/forecast?'),
         
         success: function(data) {
-            console.log('Received forecast data!');
+            $('#forecastData').empty();
             for (var i = 7; i < data.cnt; i += 8) {
                 var day = (i + 1) / 8;
                 addForecastEntry(data.list[i], day);
