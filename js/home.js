@@ -1,5 +1,5 @@
 
-var APIKey = "78caea59c91a7db4d28883099674f1c2";
+var APIKey = "Add Your Own Here :)";
 var units = 'imperial';
 var zip = '44311';
 
